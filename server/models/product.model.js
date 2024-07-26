@@ -10,9 +10,9 @@ const productschema = new Schema({
     type: String,
     enum: [
       "Food and Beverage",
-      "Health and Wellness",
+      "Furniture",
       "Green Technology",
-      "Children and Family",
+      "Clothing and Equipment",
       "Home and Garden",
     ],
   },

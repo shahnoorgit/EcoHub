@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  width: 100vw; /* Ensure the body takes the full viewport width */
+}
