@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import { category } from "../../constants";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -13,14 +14,19 @@ const Home = () => {
               Healthy Earth.
             </h1>
             <p className=" font-semibold text-xl text-gray-700">
-              Buy range of Eco-friendly products with ease and
+              Buy range of Eco-friendly products with ease,
               <br />
               Reduce your carbon footprint and support a sustainable future.
             </p>
             <center>
-              <div className=" rounded-full mt-5 w-28 flex justify-center items-center p-3 bg-[#658C4A] h-10">
-                <span className="font-semibold text-white">Learn More</span>
-              </div>
+              <Link
+                to={"/products/all"}
+                className=" rounded-full mt-5 w-48 cursor-pointer flex justify-center items-center p-3 bg-[#658C4A] h-10"
+              >
+                <span className="font-semibold text-white">
+                  Browse Products
+                </span>
+              </Link>
             </center>
           </div>
         </div>
@@ -41,7 +47,7 @@ const Home = () => {
           </h1>
         </div>
         {category.map((cat) => (
-          <div className="flex max-sm:w-full max-sm:gap-5 hover:scale-105 transition-all ease-in relative cursor-pointer justify-center items-center">
+          <div className="flex border-green-500 rounded-lg border-2 max-sm:w-full max-sm:gap-5 hover:scale-105 transition-all ease-in relative cursor-pointer justify-center items-center">
             <img
               src={cat.image}
               className=" object-contain rounded-lg"

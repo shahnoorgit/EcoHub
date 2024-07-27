@@ -1,12 +1,13 @@
 import React from "react";
 import { HiOutlineUser } from "react-icons/hi2";
 import { IoBagHandleOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <header className=" w-full h-full bg-white px-5 flex flex-col justify-between items-center">
       <div className=" w-screen flex px-10 max-sm:p-0 gap-5 max-sm:gap-0 items-center h-[80px]">
-        <div className=" flex justify-center items-center">
+        <Link to={"/"} className=" flex justify-center items-center">
           <img
             src="/images/Logo.png"
             width={90}
@@ -14,7 +15,7 @@ const Navbar = () => {
             alt="logo"
             className=" object-cover"
           />
-        </div>
+        </Link>
         <div class="relative w-[80%] mx-5">
           <input
             class="appearance-none border-2 h-12 pl-10 border-gray-300 hover:border-gray-400 transition-colors rounded-3xl w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:ring-green-600 focus:border-green-600 focus:shadow-outline"
