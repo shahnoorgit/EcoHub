@@ -1,3 +1,4 @@
+import Cart from "../models/cart.model.js";
 import User from "../models/user.model.js";
 import generateTokenandsetCookie from "../services/jwt.js";
 import bcrypt from "bcryptjs";
@@ -5,41 +6,58 @@ import bcrypt from "bcryptjs";
 export const register = async (req, res) => {
   const { username, email, password, confirmPassword } = req.body;
 
+  // Validation
+  if (!username || !email || !password || !confirmPassword) {
+    return res.status(400).json({ error: "All fields are required" });
+  }
+
+  if (password !== confirmPassword) {
+    return res.status(400).json({ error: "Passwords do not match" });
+  }
+
   try {
-    if (!username || !email || !password || !confirmPassword) {
-      return res.status(400).json({ error: "All fields are required" });
+    // Check if username or email already exists
+    const [user, mail] = await Promise.all([
+      User.findOne({ username }),
+      User.findOne({ email }),
+    ]);
+
+    if (user) {
+      return res.status(400).json({ error: "Username already exists" });
     }
 
-    if (password !== confirmPassword) {
-      return res.status(400).json({ error: "Passwords do not match" });
+    if (mail) {
+      return res.status(400).json({ error: "Email already exists" });
     }
 
-    const user = await User.findOne({ username });
-    const mail = await User.findOne({ email });
-    if (user || mail) {
-      return res
-        .status(400)
-        .json({ error: "Username or email already exists" });
-    }
+    // Hash password
+    const hashedPassword = await bcrypt.hash(
+      password,
+      await bcrypt.genSalt(10)
+    );
 
-    const salt = await bcrypt.genSalt(5);
-    const hashedPassword = await bcrypt.hash(password, salt);
-
+    // Create new user and cart
     const newUser = await User.create({
       username,
       email,
       password: hashedPassword,
-      createdAt: Date.now(),
       isSeller: false,
       wishlist: [],
     });
 
+    await Cart.create({
+      userId: newUser._id,
+      products: [],
+    });
+
+    // Generate token and set cookie
     generateTokenandsetCookie(newUser._id, res);
 
+    // Respond with new user ID
     res.status(201).json({ _id: newUser._id });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: error });
+    console.error("Error during registration:", error);
+    res.status(500).json({ error: "Server error" });
   }
 };
 
