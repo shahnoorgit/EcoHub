@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { HiOutlineUser } from "react-icons/hi2";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { FaCloudUploadAlt } from "react-icons/fa";
+import ProductUploadModal from "./ProductUpload";
 
 const Navbar = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <header className=" w-full h-full bg-white px-5 flex flex-col justify-between items-center">
+      <div className="z-50">
+        <ProductUploadModal isOpen={isModalOpen} onClose={closeModal} />
+      </div>
       <div className=" w-screen flex px-10 max-sm:p-0 gap-5 max-sm:gap-0 items-center h-[80px]">
         <Link to={"/"} className=" flex justify-center items-center">
           <img
@@ -44,6 +57,9 @@ const Navbar = () => {
         <div className=" flex items-center max-sm:gap-0 ">
           <HiOutlineUser className="h-8 w-8 max-sm:h-5 max-sm:w-5 cursor-pointer text-gray-400 hover:text-gray-500" />
           <IoBagHandleOutline className="h-8 max-sm:h-5 max-sm:w-5 w-8 ml-4 max-sm:ml-1 cursor-pointer text-gray-400 hover:text-gray-500" />
+          <button onClick={openModal}>
+            <FaCloudUploadAlt className="h-8 max-sm:h-5 max-sm:w-5 w-8 ml-4 max-sm:ml-1 cursor-pointer text-gray-400 hover:text-gray-500" />
+          </button>
         </div>
       </div>
       <div className=" flex items-center border-b border-gray-700 justify-center w-screen">
