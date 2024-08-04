@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import useUploadProduct from "../hook/useUploadProduct";
+import { useNavigate } from "react-router-dom";
 
-const ProductUploadModal = ({ isOpen, onClose }) => {
+const ProductUploadModal = ({ sellerId, isOpen, onClose }) => {
+  const nav = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     price: "",
@@ -11,6 +14,8 @@ const ProductUploadModal = ({ isOpen, onClose }) => {
     sustainabilityCertification: "",
     sellerId: "",
   });
+
+  const { loading, upload } = useUploadProduct();
 
   const categories = [
     "Food and Beverage",
@@ -28,10 +33,25 @@ const ProductUploadModal = ({ isOpen, onClose }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const form = new FormData();
+    form.append("name", formData.name);
+    form.append("price", formData.price);
+    form.append("quantity", formData.quantity);
+    form.append("description", formData.description);
+    form.append("category", formData.category);
+    form.append("image", formData.image);
+    form.append(
+      "sustainabilityCertification",
+      formData.sustainabilityCertification
+    );
+    form.append("sellerId", sellerId);
     // Handle form submission logic here
-    console.log(formData);
+    const data = await upload(form);
+    if (data.ok) {
+      nav("/");
+    }
   };
 
   if (!isOpen) return null;
@@ -169,7 +189,7 @@ const ProductUploadModal = ({ isOpen, onClose }) => {
               type="submit"
               className="px-4 py-2 border rounded-lg text-white bg-green-600 hover:bg-green-700"
             >
-              Upload
+              {loading ? "Uploading..." : "Upload Product"}
             </button>
           </div>
         </form>

@@ -17,9 +17,10 @@ export const register = async (req, res) => {
 
   try {
     // Check if username or email already exists
+    console.log(username, email, password);
     const [user, mail] = await Promise.all([
       User.findOne({ username }),
-      User.findOne({ email }),
+      User.findOne({ email: email.toLowerCase() }),
     ]);
 
     if (user) {
@@ -39,7 +40,7 @@ export const register = async (req, res) => {
     // Create new user and cart
     const newUser = await User.create({
       username,
-      email,
+      email: email.toLowerCase(),
       password: hashedPassword,
       isSeller: false,
       wishlist: [],
@@ -63,8 +64,9 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
+  console.log(email, password);
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: email.toLowerCase() });
     if (!user) {
       return res.status(401).json({ error: "Invalid email" });
     }
@@ -90,5 +92,18 @@ export const logout = (req, res) => {
     res.status(200).json({ message: "user logged out succesfully" });
   } catch (error) {
     res.status(500).json({ error: error });
+  }
+};
+
+export const getUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.body.userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
   }
 };

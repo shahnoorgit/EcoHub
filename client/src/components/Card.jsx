@@ -2,7 +2,7 @@ import React from "react";
 
 const Card = ({ title, desc, image, certificate, category, price }) => {
   return (
-    <div className="max-w-sm rounded-lg border-green-500 border-2 overflow-hidden shadow-lg bg-white m-4 transform hover:scale-105 transition-transform duration-300 ease-in-out">
+    <div className="max-w-sm  rounded-lg border-green-500 border-2 overflow-hidden shadow-lg bg-white m-4 transform hover:scale-105 transition-transform duration-300 ease-in-out">
       <img className="w-full h-48 object-cover" src={image} alt={title} />
       <div className="p-4 flex flex-col h-48">
         <h2 className="text-2xl font-semibold text-green-800">{title}</h2>

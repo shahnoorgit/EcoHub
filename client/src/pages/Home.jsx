@@ -1,5 +1,3 @@
-import React from "react";
-import Navbar from "../components/Navbar";
 import { category } from "../../constants";
 import { Link } from "react-router-dom";
 
@@ -7,7 +5,7 @@ const Home = () => {
   return (
     <main className=" bg-white min-w-full">
       <section className=" min-w-full h-[30%] flex justify-center items-center">
-        <div className="  w-1/2 flex justify-center p-3 h-[500px] items-center">
+        <div className="  w-1/2 flex justify-center p-3 max-sm:w-full h-[500px] items-center">
           <div className=" flex flex-col gap-3">
             <h1 className=" font-serif font-bold text-4xl text-gray-800">
               Eco-Friendly Products , <br />
@@ -30,7 +28,7 @@ const Home = () => {
             </center>
           </div>
         </div>
-        <div className="  w-1/2 flex justify-center p-5 h-[500px] items-center">
+        <div className="  w-1/2 flex max-sm:hidden justify-center p-5 h-[500px] items-center">
           <img
             src="/images/hero.png"
             alt="Eco-friendly Products"
@@ -39,7 +37,7 @@ const Home = () => {
         </div>
       </section>
       <section className="flex items-center flex-col sm:flex-row sm:justify-between gap-1 mt-10 mb-10">
-        <div className="p-10 w-[200px] h-[150px]">
+        <div className="p-10 max-sm:w-full w-[200px] h-[150px]">
           <h1 className="flex font-bold font-serif text-[#658C4A] text-4xl">
             <span>
               Category <br /> for <br /> you

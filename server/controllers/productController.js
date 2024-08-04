@@ -13,21 +13,21 @@ export const createProduct = async (req, res) => {
     sustainabilityCertification,
     sellerId,
   } = req.body;
+  console.log(
+    name,
+    price,
+    quantity,
+    description,
+    category,
+    image,
+    sustainabilityCertification,
+    sellerId
+  );
+
   try {
-    if (
-      !name ||
-      !price ||
-      !quantity ||
-      !sustainabilityCertification ||
-      !sellerId ||
-      !category ||
-      !image
-    ) {
-      return res.status(400).json({ message: "All fields are required" });
-    }
     if (price <= 0 || quantity < 0) {
       return res.status(400).json({
-        message:
+        error:
           "Price must be a positive number and quantity cannot be negative",
       });
     }
@@ -43,7 +43,7 @@ export const createProduct = async (req, res) => {
       quantity,
       description,
       category,
-      image,
+      image: req.file.path,
       sustainabilityCertification,
       createdBy: sellerId,
       createdAt: Date.now(),
@@ -68,12 +68,12 @@ export const updateProduct = async (req, res) => {
   try {
     if (price && (isNaN(price) || price <= 0)) {
       return res.status(400).json({
-        message: "Price must be a positive number",
+        error: "Price must be a positive number",
       });
     }
     if (quantity && (isNaN(quantity) || quantity < 0)) {
       return res.status(400).json({
-        message: "Quantity cannot be negative",
+        error: "Quantity cannot be negative",
       });
     }
 
@@ -104,7 +104,7 @@ export const updateProduct = async (req, res) => {
     });
 
     res.status(200).json({
-      message: "Product updated successfully",
+      error: "Product updated successfully",
       product: updatedProduct,
     });
   } catch (error) {
@@ -170,9 +170,9 @@ export const deleteProduct = async (req, res) => {
     // Delete the product
     await Product.findByIdAndDelete(id);
 
-    res.status(200).json({ message: "Product deleted successfully" });
+    res.status(200).json({ error: "Product deleted successfully" });
   } catch (error) {
-    console.error("Error deleting product:", error.message); // Log the error message
+    console.error("Error deleting product:", error.error); // Log the error error
     res.status(500).json({ error: "Server Error" });
   }
 };

@@ -148,7 +148,7 @@ const ProductListing = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <main className="w-full bg-gray-200 h-full max-sm:p-0 py-5 min-h-screen">
+    <main className="w-full relative -z-10  bg-gray-200 h-full max-sm:p-0 py-5 min-h-screen">
       <section className="mx-auto w-[99%] min-h-full bg-white p-5">
         <div className="flex justify-between items-center w-full pb-5 border-b">
           <span className="font-semibold text-xs text-gray-900">
@@ -163,18 +163,20 @@ const ProductListing = () => {
             </button>
           </div>
         </div>
-        <div className="grid grid-cols-2 cursor-pointer max-sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {currentProducts.map((product, index) => (
-            <Card
-              key={index}
-              title={product.name}
-              desc={product.description}
-              image={product.image}
-              price={product.price}
-              certificate={product.sustainabilityCertification}
-              category={product.category}
-            />
-          ))}
+        <div className=" relative">
+          <div className="grid grid-cols-2 cursor-pointer max-sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {currentProducts.map((product, index) => (
+              <Card
+                key={index}
+                title={product.name}
+                desc={product.description}
+                image={product.image}
+                price={product.price}
+                certificate={product.sustainabilityCertification}
+                category={product.category}
+              />
+            ))}
+          </div>
         </div>
         <div className="flex justify-center mt-4">
           {pageNumbers.map((number) => (
