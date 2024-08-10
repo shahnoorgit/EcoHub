@@ -7,11 +7,13 @@ import cartRoutes from "./routes/cart.routes.js";
 import sellerRoutes from "./routes/seller.routes.js";
 import connectDB from "./database/connectDB.js";
 import bodyParser from "body-parser";
+import path from "path";
 
 dotenv.config();
 
 const app = express();
 
+app.use("/images", express.static(path.join(path.resolve(), "tmp")));
 app.listen("8000", async () => {
   await connectDB();
   console.log("Server is running on port 8000");

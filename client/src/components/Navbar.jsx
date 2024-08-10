@@ -22,13 +22,12 @@ const Navbar = ({ auth }) => {
   };
   return (
     <header className=" w-full h-full bg-white px-5 flex flex-col justify-between items-center">
-      <div className="z-50">
-        <ProductUploadModal
-          sellerId={auth?._id}
-          isOpen={isModalOpen}
-          onClose={closeModal}
-        />
-      </div>
+      <ProductUploadModal
+        sellerId={auth?._id}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
+
       <div className=" w-screen flex px-10 max-sm:p-0 gap-5 max-sm:gap-0 items-center h-[80px]">
         <Link to={"/"} className=" flex justify-center items-center">
           <img
@@ -113,7 +112,7 @@ const Navbar = ({ auth }) => {
           </div>
         </div>
       </div>
-      <div className="relative w-screen p-4 flex justify-center items-center border-b border-gray-700">
+      <div className=" w-screen p-4 flex justify-center items-center border-b border-gray-700">
         <ul
           className={`lg:flex gap-2 justify-center items-center mb-5 lg:mb-0 ${
             isMenuOpen
@@ -127,24 +126,42 @@ const Navbar = ({ auth }) => {
           >
             <IoMdClose />
           </button>
-          <li className="px-5 py-2 font-bold cursor-pointer text-base text-gray-950 max-sm:text-gray-100 hover:text-gray-300">
+          <Link
+            to={"/products/all"}
+            className="px-5 py-2 font-bold cursor-pointer text-base text-gray-950 max-sm:text-gray-100 hover:text-gray-300"
+          >
+            All
+          </Link>
+          <Link
+            to={"/products/Clothing and Equipment"}
+            className="px-5 py-2 font-bold cursor-pointer text-base text-gray-950 max-sm:text-gray-100 hover:text-gray-300"
+          >
             Clothing
-          </li>
-          <li className="px-5 py-2 font-bold cursor-pointer text-base text-gray-950 max-sm:text-gray-100 hover:text-gray-300">
+          </Link>
+          <Link
+            to={"/products/Home and Garden"}
+            className="px-5 py-2 font-bold cursor-pointer text-base text-gray-950 max-sm:text-gray-100 hover:text-gray-300"
+          >
             Home Garden
-          </li>
-          <li className="px-5 py-2 font-bold cursor-pointer text-base text-gray-950 max-sm:text-gray-100 hover:text-gray-300">
+          </Link>
+          <Link
+            to={"/products/Furniture"}
+            className="px-5 py-2 font-bold cursor-pointer text-base text-gray-950 max-sm:text-gray-100 hover:text-gray-300"
+          >
             Furniture
-          </li>
-          <li className="px-5 py-2 font-bold cursor-pointer text-base text-gray-950 max-sm:text-gray-100 hover:text-gray-300">
+          </Link>
+          <Link
+            to={"/products/Green Technology"}
+            className="px-5 py-2 font-bold cursor-pointer text-base text-gray-950 max-sm:text-gray-100 hover:text-gray-300"
+          >
             Green Technology
-          </li>
-          <li className="px-5 py-2 font-bold cursor-pointer text-base text-gray-950 max-sm:text-gray-100 hover:text-gray-300">
+          </Link>
+          <Link
+            to={"/products/Food and Beverage"}
+            className="px-5 py-2 font-bold cursor-pointer text-base text-gray-950 max-sm:text-gray-100 hover:text-gray-300"
+          >
             Food & Beverage
-          </li>
-          <li className="px-5 py-2 font-bold cursor-pointer text-base text-gray-950 max-sm:text-gray-100 hover:text-gray-300">
-            Accessories
-          </li>
+          </Link>
           <Link to={"/login"}>
             <Link
               to={"/login"}

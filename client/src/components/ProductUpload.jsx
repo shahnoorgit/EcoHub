@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import useUploadProduct from "../hook/useUploadProduct";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const ProductUploadModal = ({ sellerId, isOpen, onClose }) => {
-  const nav = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     price: "",
@@ -49,16 +48,15 @@ const ProductUploadModal = ({ sellerId, isOpen, onClose }) => {
     form.append("sellerId", sellerId);
     // Handle form submission logic here
     const data = await upload(form);
-    if (data.ok) {
-      nav("/");
+    if (data == ok) {
+      onClose();
     }
   };
-
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center backdrop-blur-md z-50">
-      <div className="bg-white min-w-[80%] sm:min-w-[60%] md:min-w-[50%] lg:min-w-[40%] xl:min-w-[30%] p-6 rounded-lg shadow-lg w-full max-w-3xl z-50">
+      <div className="relative bg-white min-w-[80%] sm:min-w-[60%] md:min-w-[50%] lg:min-w-[40%] xl:min-w-[30%] p-6 rounded-lg shadow-lg w-full max-w-3xl z-50">
         <h2 className="text-2xl font-bold mb-4">Upload Eco-Friendly Product</h2>
         <form onSubmit={handleSubmit} className="overflow-y-auto h-full">
           <div className="mb-4">

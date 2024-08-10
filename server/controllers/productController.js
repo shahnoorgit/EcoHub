@@ -209,3 +209,19 @@ export const getSellerProducts = async (req, res) => {
     res.status(500).json({ error: "Server Error" });
   }
 };
+
+export const getProductByCategory = async (req, res) => {
+  const { category } = req.params;
+  try {
+    const products = await Product.find({ category: category });
+    if (!products) {
+      return res
+        .status(404)
+        .json({ error: "No products found in this category" });
+    }
+    res.status(200).json({ products });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Server Error" });
+  }
+};

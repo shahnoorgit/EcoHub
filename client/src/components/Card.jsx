@@ -1,9 +1,14 @@
 import React from "react";
 
 const Card = ({ title, desc, image, certificate, category, price }) => {
+  const imgUrl = String(image);
   return (
     <div className="max-w-sm  rounded-lg border-green-500 border-2 overflow-hidden shadow-lg bg-white m-4 transform hover:scale-105 transition-transform duration-300 ease-in-out">
-      <img className="w-full h-48 object-cover" src={image} alt={title} />
+      <img
+        className="w-full h-48 object-cover"
+        src={`http://localhost:8000/images/${imgUrl.slice(4)}`}
+        alt={title}
+      />
       <div className="p-4 flex flex-col h-48">
         <h2 className="text-2xl font-semibold text-green-800">{title}</h2>
         <p className="text-gray-600 mt-2 flex-grow overflow-hidden overflow-ellipsis">

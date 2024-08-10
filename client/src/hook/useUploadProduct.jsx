@@ -17,7 +17,7 @@ const useUploadProduct = () => {
       }
       setLoading(false);
       toast.success("Product uploaded successfully");
-      return ok;
+      return "ok";
     } catch (error) {
       toast.error(error.message);
       setLoading(false);
