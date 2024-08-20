@@ -20,7 +20,11 @@ const Signup = () => {
       return;
     }
     // Add your own logic to handle form submission here
-    await signup(formData);
+    const ok = await signup(formData);
+    if (!ok) {
+      toast.error(data.error);
+      return;
+    }
 
     setFormData({
       username: "",

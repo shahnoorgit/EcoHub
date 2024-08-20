@@ -49,6 +49,7 @@ export const register = async (req, res) => {
     await Cart.create({
       userId: newUser._id,
       products: [],
+      address: {},
     });
 
     // Generate token and set cookie

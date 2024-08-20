@@ -10,9 +10,13 @@ import Signup from "./pages/Signup";
 import { AuthProvider } from "./context/authContext";
 import { useContext } from "react";
 import Footer from "./components/Footer";
+import Cart from "./pages/Cart";
+import Product from "./pages/Product";
 
 function App() {
   const { user } = useContext(AuthProvider);
+  console.log("----", user);
+
   const pathname = useLocation();
   const authRoute =
     pathname.pathname === "/login" || pathname.pathname === "/register"
@@ -34,6 +38,12 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/products/:category" element={<ProductListing />} />
+        <Route exact path="/product/:id" element={<Product />} />
+        <Route
+          exact
+          path="/products/cart"
+          element={<Cart userId={user?._id} />}
+        />
         <Route
           path="/login"
           element={user ? <Navigate to={"/"} /> : <Login />}

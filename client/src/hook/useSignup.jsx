@@ -22,7 +22,7 @@ const useSignup = () => {
       const data = await res.json();
       if (data.error) {
         toast.error(data.error);
-        return;
+        return false;
       }
       setLoading(false);
       localStorage.setItem("tokenId", data._id);

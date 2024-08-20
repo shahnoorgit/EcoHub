@@ -6,6 +6,15 @@ const cartSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    address: {
+      address: {
+        name: String,
+        city: String,
+        state: String,
+        country: String,
+        postalCode: String,
+      },
+    },
     products: [
       {
         productId: {

@@ -68,7 +68,9 @@ const Navbar = ({ auth }) => {
             {auth != null ? (
               <>
                 <HiOutlineUser className="h-8 w-8 max-sm:h-5 max-sm:w-5 cursor-pointer text-gray-400 hover:text-gray-500" />
-                <IoBagHandleOutline className="h-8 max-sm:h-5 max-sm:w-5 w-8 ml-4 max-sm:ml-1 cursor-pointer text-gray-400 hover:text-gray-500" />
+                <Link to={"/products/cart"}>
+                  <IoBagHandleOutline className="h-8 max-sm:h-5 max-sm:w-5 w-8 ml-4 max-sm:ml-1 cursor-pointer text-gray-400 hover:text-gray-500" />
+                </Link>
                 <button onClick={openModal}>
                   <FaCloudUploadAlt className="h-8 max-sm:h-5 max-sm:w-5 w-8 ml-4 max-sm:ml-1 cursor-pointer text-gray-400 hover:text-gray-500" />
                 </button>

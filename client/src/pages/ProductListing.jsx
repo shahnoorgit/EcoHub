@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import useGetProducts from "../hook/useGetProducts";
 import Spinner from "../components/Spinner";
 import Card from "../components/Card"; // Adjust the import path as necessary
@@ -89,15 +89,17 @@ const ProductListing = () => {
           ) : (
             <div className="grid grid-cols-2 cursor-pointer max-sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {currentProducts.map((product, index) => (
-                <Card
-                  key={index}
-                  title={product.name}
-                  desc={product.description}
-                  image={product.image}
-                  price={product.price}
-                  certificate={product.sustainabilityCertification}
-                  category={product.category}
-                />
+                <Link to={`/product/${product._id}`}>
+                  <Card
+                    key={index}
+                    title={product.name}
+                    desc={product.description}
+                    image={product.image}
+                    price={product.price}
+                    certificate={product.sustainabilityCertification}
+                    category={product.category}
+                  />
+                </Link>
               ))}
             </div>
           )}
